@@ -1,0 +1,94 @@
+/* supabase-theme-dark.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --supabase-green: #3ECF8E;
+    --supabase-black: #1E1E1E;
+    --supabase-grey: #2C2C2C;
+    --supabase-white: #FFFFFF;
+    --supabase-light-grey: #A3A3A3;
+}
+
+.reveal {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--supabase-black);
+    color: var(--supabase-white);
+}
+
+.reveal .slides {
+    text-align: left;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    color: var(--supabase-green);
+}
+
+.reveal a {
+    color: var(--supabase-green);
+}
+
+.reveal .backgrounds .slide-background {
+    background-color: var(--supabase-black);
+}
+
+.reveal .controls {
+    color: var(--supabase-green);
+}
+
+.reveal .progress {
+    background-color: var(--supabase-light-grey);
+    color: var(--supabase-green)
+}
+
+.reveal .slide-number {
+    color: var(--supabase-green);
+}
+
+.reveal ul {
+    list-style-type: disc;
+    margin-left: 20px;
+        font-size: 2rem;
+
+}
+
+.reveal pre {
+    background: var(--supabase-grey);
+    color: var(--supabase-white);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+.reveal img {
+    max-width: 100%;
+    height: auto;
+}
+
+.reveal table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reveal table th,
+.reveal table td {
+    border: 1px solid var(--supabase-light-grey);
+    padding: 8px;
+    text-align: left;
+    font-size: 1.9rem;
+}
+
+.reveal table th {
+    background-color: var(--supabase-green);
+    color: var(--supabase-black);
+}
+
+.reveal table td {
+    background-color: var(--supabase-grey);
+}
