@@ -23,9 +23,9 @@ jobs:
 
     - name: Create artifact
       uses: actions/upload-pages-artifact@v3
-        with: 
-          name: github-pages
-          path: .
+      with: 
+        name: github-pages
+        path: .
 
     - name: Upload artifact
       uses: actions/deploy-pages@v4
