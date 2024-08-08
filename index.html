@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme">
     <link rel="stylesheet" href="supabase-theme-dark.css">
     <link rel="stylesheet" href="node_modules/highlight.js/styles/monokai.css">
+    <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
+    <link rel="stylesheet" href="assets/clippy.css" />
+    <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
+    <script src="https://unpkg.com/jquery@3.2.1"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
+"></script>
     <style>
         .image-list {
         margin-top: 15px !important;
@@ -83,6 +90,22 @@
             height: 100%;
             margin: 0 20px;
         }
+
+        @keyframes swimUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+
+        .swimming-docker {
+            animation: swimUpDown 2s ease-in-out infinite;
+        }
+        .clippy,  .clippy-bottom-right {
+            position: absolute;
+            z-index: 500;
+            top: 85vh !important;
+            left: 85vw !important
+        }
+        
     </style>
 </head>
 
@@ -336,31 +359,114 @@
                     </div>
                 </div>
             </section>
-                <section data-auto-animate>
-					<h2 data-id="code-title">Pretty Code</h2>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-async getPizzas() {
-    const pizzaquery = this.supabase
-        .from('pizzas')
-        .select('*, toppings(*)').returns<PizzaWithToppings[]>()
-    const { data, error } = await pizzaquery;
-    if (error) throw error;
-    return data ?? [];
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="https://highlightjs.org/usage/">highlight.js</a>.</p>
-				</section>
+            <section>
+                <h2 data-id="code-title">Client libraries</h2>
+                <pre data-id="code-animation">
+                    <code class="hljs bash" data-trim >
+                        <script type="text/template">
+npm install @supabase/supabase-js
+                        </script>
+                    </code>
 
+                </pre>
+                <div id="terminal"></div>
+
+                <script>
+                    var term = new Terminal();
+                    var buff = '';
+                    var clippyClipped = false;
+                     // Load Clippy on page load
+                    window.clippy.load('Clippy', function(agent) {
+                        window.clippyAgent = agent;
+                    });
+                    
+                    function clippyJoke() {
+                                if (window.clippyAgent) {
+                                    window.clippyAgent.show();
+                                    window.clippyAgent.moveTo(200, 300);
+                                    window.clippyAgent.speak("Trying to fix a dependency conflict, I see? How about taking a break and coming back with a fresh perspective? Or just deleting node_modules and starting over. That always works, right?");
+                                    window.clippyAgent.animate();
+                                    clippyClipped = true;
+                                }
+                    }
+                    term.prompt = () => {
+                        term.write("\r\n$ ");
+                    };
+
+                    term.open(document.getElementById('terminal'));
+                    term.write('lorismingolla $ ')
+                    term.prompt();
+                    term.onKey((ev) => {
+                            const printable = !ev.altKey && !ev.altGraphKey &&
+                                !ev.ctrlKey && !ev.metaKey;
+                                if (buff.startsWith('npm install') && !clippyClipped) {
+                                    clippyJoke();
+                                }
+                            if (ev.domEvent.keyCode === 13) {
+                                if (buff.startsWith('npm install')) {
+                                    simulateNpmInstall();
+                                } else {
+                                    term.writeln('');
+                                    term.writeln('Command not recognized');
+                                    term.prompt();
+                                }
+                                buff = '';
+                            } else if (ev.domEvent.keyCode === 8) {
+                                // Do not delete the prompts
+                                buff = buff.slice(0, -1);
+                                if (term.buffer._normal.cursorX > 2) {
+                                    term.write("\b \b");
+                                }
+                            } 
+                            else if (printable) {
+                                buff += ev.key;
+                                term.write(ev.key);
+                            }
+                            function getRandomDelay() {
+                                return Math.floor(Math.random() * (1250 - 100 + 1)) + 100;
+                            }
+                            
+                            function simulateNpmInstall() {
+                            const steps = [
+                                'npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142',
+                                'npm WARN deprecated har-validator@5.1.5: this library is no longer supported',
+                                'npm WARN deprecated core-js@2.6.12: core-js@<3.6 is no longer maintained and not recommended for usage due to the number of issues.',
+                                'npm notice created a lockfile as package-lock.json. You should commit this file.',
+                                'npm WARN notsup Unsupported engine for @supabase/supabase-js@1.0.0: wanted: {"node":">=12"} (current: {"node":"10.19.0"})',
+                                'npm WARN notsup Not compatible with your version of node/npm: @supabase/supabase-js@1.0.0',
+                                '',
+                                'added 1 package, and audited 1 package in 2s',
+                                'found 0 vulnerabilities'
+                            ];
+
+                            term.writeln('');
+                            term.writeln('npm install started...');
+                            let stepIndex = 0;
+
+                            const interval = setInterval(() => {
+                                if (stepIndex < steps.length) {
+                                    term.writeln(steps[stepIndex]);
+                                    stepIndex++;
+                                } else {
+                                    clearInterval(interval);
+                                    term.writeln('');
+                                    term.writeln('npm install complete.');
+                                    term.prompt();
+                                }
+                            }, getRandomDelay()); // Adjust the delay between steps as needed
+                            }         
+                                      
+                        });
+                </script>
+            </section>
 				<section data-auto-animate>
-					<h2 data-id="code-title">With Animations</h2>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
-						<script type="text/template">
-						import { Component, OnInit, inject } from '@angular/core';
+					<h2 data-id="code-title">Client libraries</h2>
+					<pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="20-27|6,13"><script type="text/template">
+import { Component, OnInit, inject } from '@angular/core';
 import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
-import { PrismaClient } from '@prisma/client';
-import { SupabaseClient } from '@supabase/supabase-js';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { PizzaWithToppings } from '../../shared/types/PizzaTypes';
+import { SupabaseClient } from '@supabase/supabase-js';
 @Component({
     standalone: true,
     imports: [MenuItemComponent, NgFor, AsyncPipe],
@@ -370,9 +476,6 @@ import { PizzaWithToppings } from '../../shared/types/PizzaTypes';
 export class OrderPageComponent implements OnInit{
     supabase = inject(SupabaseClient);
     pizzas: PizzaWithToppings[] =[];
-    
-    constructor() {
-    }
 
     async ngOnInit() {
         this.pizzas = await this.getPizzas();
@@ -389,48 +492,115 @@ export class OrderPageComponent implements OnInit{
 }
 
 					</script></code></pre>
-				</section>
-            </section>
-            <!-- Image Slide -->
-            <section>
-                <h2>Architecture blabla</h2>
-                <img src="https://your-image-url.com/architecture.png" alt="Supabase Architecture">
-            </section>
+                </section>
+                    <section data-auto-animate>
+					<h2 data-id="code-title">Client libraries</h2>
+                    <pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="66-68|27-31"><script type="text/template">
+import { Inject, Injectable, inject } from '@angular/core'
+import {
+  AuthChangeEvent,
+  AuthSession,
+  Session,
+  SupabaseClient,
+  User,
+} from '@supabase/supabase-js'
+import { Database } from '../shared/supabase'
 
-            <!-- Comparison Table Slide -->
+export interface Profile {
+  id?: string
+  username: string
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SupabaseService {
+    _session: AuthSession | null = null
+    supabase = inject(SupabaseClient)
+
+  constructor() {
+  }
+
+  async verifySignin(token: string) {
+    const { data, error } = await this.supabase.auth.verifyOtp({ token_hash: token, type: 'email' })
+    if (error) throw error;
+    return true
+  }
+
+  get session() {
+    this.supabase.auth.getSession().then(({ data }) => {
+      this._session = data.session
+    })
+    return this._session
+  }
+
+  profile(user: User) {
+    return this.supabase
+      .from('profiles')
+      .select(`username`)
+      .eq('id', user.id)
+      .single()
+  }
+
+  authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
+    return this.supabase.auth.onAuthStateChange(callback)
+  }
+
+  signIn(email: string) {
+    return this.supabase.auth.signInWithOtp({ email, options: {
+      emailRedirectTo: 'localhost:4200/order'
+    } })
+  }
+
+  signOut() {
+    return this.supabase.auth.signOut()
+    }
+    
+  getUser() {
+    return this.supabase.auth.getUser();
+  }
+
+  async isAuthenticated() {
+    return !!this.session?.user;;
+  }
+}
+					</script></code></pre>
+				</section>
+                <section>
+                <h2 data-id="code-title">Local development</h2>
+                <a href="http://127.0.0.1:54323/project/default">Local supabase</a> 
+                <pre data-id="code-animation">
+                    <code class="hljs bash" data-trim >
+                        <script type="text/template">
+npm install supabase --save-dev
+npm start
+                        </script>
+                    </code>
+                </pre>
+                or
+                <pre data-id="code-animation">
+                    <code class="hljs bash" data-trim >
+                        <script type="text/template">
+npx supabase start
+                        </script>
+                    </code>
+                </pre>
+                <div style="width: 100vw;">
+				    <svg class="swimming-docker" xmlns="http://www.w3.org/2000/svg" aria-label="Docker" role="img" viewBox="0 0 512 512" width="150px" height="150px"><path stroke="#066da5" stroke-width="38" d="M296 226h42m-92 0h42m-91 0h42m-91 0h41m-91 0h42m8-46h41m8 0h42m7 0h42m-42-46h42"/><path fill="#066da5" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/></svg>
+                </div>
+            </section>
+            </section>
             <section>
-                <h2>Comparison</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Supabase</th>
-                            <th>Other Services</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>API Generation</td>
-                            <td>Instant</td>
-                            <td>Manual</td>
-                        </tr>
-                        <tr>
-                            <td>Realtime</td>
-                            <td>Built-in</td>
-                            <td>Add-ons</td>
-                        </tr>
-                        <tr>
-                            <td>Authentication</td>
-                            <td>Integrated</td>
-                            <td>Third-party</td>
-                        </tr>
-                        <tr>
-                            <td>Storage</td>
-                            <td>Managed</td>
-                            <td>Separate service</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <section>
+                    <h2>Demo + whats more...</h2>
+                </section>
+                <section>
+                    <h2>Questions?</h2>
+                </section>
+                <section>
+                    <h2>Thanks for stretching your attention span</h2>
+                    <img style="height: 22vw; width:30vw" src="assets/thank-you-thanks.gif" alt="">
+                </section>
             </section>
         </div>
     </div>
@@ -450,6 +620,9 @@ export class OrderPageComponent implements OnInit{
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealHighlight ]
 			});
+            Reveal.on('slidechanged', (event) => {
+                    window.clippyAgent.hide()
+            });
             var video = document.getElementById('video');
             // Add a listener to this video, so that when the video ends, the video is "hidden".
             video.addEventListener('ended', function() {

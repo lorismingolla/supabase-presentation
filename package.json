@@ -9,6 +9,8 @@
   "author": "Loris Mingolla",
   "license": "MIT",
   "dependencies": {
+    "@xterm/xterm": "^5.5.0",
+    "clippyts": "^1.0.4",
     "highlight.js": "^11.9.0",
     "http-server": "^14.1.1",
     "reveal.js": "5.1.0"
