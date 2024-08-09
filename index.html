@@ -461,7 +461,7 @@ npm install @supabase/supabase-js
             </section>
 				<section data-auto-animate>
 					<h2 data-id="code-title">Client libraries</h2>
-					<pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="20-27|6,13"><script type="text/template">
+					<pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="20-27|6,14"><script type="text/template">
 import { Component, OnInit, inject } from '@angular/core';
 import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
 import { AsyncPipe, NgFor } from '@angular/common';
@@ -568,12 +568,25 @@ export class SupabaseService {
 				</section>
                 <section>
                 <h2 data-id="code-title">Local development</h2>
+            <p>For stuff like:</p>
+                <ul>
+                    <li>Setup local project</li>
+                    <li>Migrations</li>
+                    <li>Handy GUI</li>
+                    <li>...</li>
+                </ul>    
+                <img class="fragment" style="height: 16vh; width:16vw"  src="assets/but-wait-theres-more.gif" alt="">
+            </section>
+                <section>
+                <h2 data-id="code-title">Local development</h2>
+                
                 <a href="http://127.0.0.1:54323/project/default">Local supabase</a> 
                 <pre data-id="code-animation">
                     <code class="hljs bash" data-trim >
                         <script type="text/template">
 npm install supabase --save-dev
-npm start
+supabase init
+supabase start
                         </script>
                     </code>
                 </pre>
@@ -581,10 +594,12 @@ npm start
                 <pre data-id="code-animation">
                     <code class="hljs bash" data-trim >
                         <script type="text/template">
+npx supabase init
 npx supabase start
                         </script>
                     </code>
                 </pre>
+                
                 <div style="width: 100vw;">
 				    <svg class="swimming-docker" xmlns="http://www.w3.org/2000/svg" aria-label="Docker" role="img" viewBox="0 0 512 512" width="150px" height="150px"><path stroke="#066da5" stroke-width="38" d="M296 226h42m-92 0h42m-91 0h42m-91 0h41m-91 0h42m8-46h41m8 0h42m7 0h42m-42-46h42"/><path fill="#066da5" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/></svg>
                 </div>
