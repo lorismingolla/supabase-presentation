@@ -105,7 +105,21 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
             top: 85vh !important;
             left: 85vw !important
         }
-        
+        .glow {
+            background-color: #fff;
+            z-index: 1;
+            box-shadow: 0px 0px 40px 20px var(--supabase-green);
+            /* in order: x offset, y offset, blur size, spread size, color */
+            /* blur size and spread size are optional (they default to 0) */
+        }
+            /* Container for the sliding div */
+        .git-stars {
+            position: fixed; /* Keep the div in a fixed position relative to the viewport */
+            right: -10vw; /* Start the div off-screen */
+            top: 50%; /* Vertically center the div */
+            transform: translateY(-50%); /* Adjust for centering */
+            animation: slideIn 1s forwards; /* Apply the slide-in animation */
+        }
     </style>
 </head>
 
@@ -114,9 +128,14 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
         <div class="slides">
             <!-- Title Slide -->
             <section>
-                <h1>Introduction to </h1><img src="./assets/supabase-dark.svg" alt="Supabase Architecture">
+                <h1>Introduction to </h1><img style="width: 40%; height: 40%;" src="./assets/supabase-dark.svg" alt="Supabase Architecture">
                 <p>Building your backend has never been easier!</p>
                 <audio data-autoplay="true" src=""></audio>
+                <div class="fragment fade-up git-stars">
+                    <iframe style="width:100%;height:auto;min-width:600px;min-height:400px;"
+                        src="https://star-history.com/embed?secret=#supabase/supabase&Date" frameBorder="0"></iframe>
+                </div>
+
             </section>
             <section>
                     <h2>Brief History & Background</h2>
@@ -240,7 +259,7 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
                     <li>Complex queries and transactions</li>
                     <li>Full-text search</li>
                     <li>Extensions like PostGIS</li>
-                    <li>Row-level security for fine-grained access control</li>
+                    <li>Supabase Row-Level Security for fine-grained access control</li>
                   </ul>
                     <svg class="wiggle" xmlns="http://www.w3.org/2000/svg"  width="12rem" height="12rem" viewBox="0 0 24 24" role="img"><title>PostgreSQL icon</title><path d="M17.128 0a10.134 10.134 0 0 0-2.755.403l-.063.02A10.922 10.922 0 0 0 12.6.258C11.422.238 10.41.524 9.594 1 8.79.721 7.122.24 5.364.336 4.14.403 2.804.775 1.814 1.82.827 2.865.305 4.482.415 6.682c.03.607.203 1.597.49 2.879s.69 2.783 1.193 4.152c.503 1.37 1.054 2.6 1.915 3.436.43.419 1.022.771 1.72.742.49-.02.933-.235 1.315-.552.186.245.385.352.566.451.228.125.45.21.68.266.413.103 1.12.241 1.948.1.282-.047.579-.139.875-.27.011.33.024.653.037.98.041 1.036.067 1.993.378 2.832.05.137.187.843.727 1.466.54.624 1.598 1.013 2.803.755.85-.182 1.931-.51 2.649-1.532.71-1.01 1.03-2.459 1.093-4.809.016-.127.035-.235.055-.336l.169.015h.02c.907.041 1.891-.088 2.713-.47.728-.337 1.279-.678 1.68-1.283.1-.15.21-.331.24-.643s-.149-.8-.446-1.025c-.595-.452-.969-.28-1.37-.197a6.27 6.27 0 0 1-1.202.146c1.156-1.947 1.985-4.015 2.458-5.845.28-1.08.437-2.076.45-2.947.013-.871-.058-1.642-.58-2.309C21.36.6 19.067.024 17.293.004c-.055-.001-.11-.002-.165-.001zm-.047.64c1.678-.016 3.822.455 5.361 2.422.346.442.449 1.088.437 1.884-.013.795-.16 1.747-.429 2.79-.522 2.02-1.508 4.375-2.897 6.488a.756.756 0 0 0 .158.086c.29.12.951.223 2.27-.048.332-.07.575-.117.827.075a.52.52 0 0 1 .183.425.704.704 0 0 1-.13.336c-.255.383-.758.746-1.403 1.045-.571.266-1.39.405-2.116.413-.364.004-.7-.024-.985-.113l-.018-.007c-.11 1.06-.363 3.153-.528 4.108-.132.77-.363 1.382-.804 1.84-.44.458-1.063.734-1.901.914-1.038.223-1.795-.017-2.283-.428-.487-.41-.71-.954-.844-1.287-.092-.23-.14-.528-.186-.926-.046-.398-.08-.885-.103-1.434a51.426 51.426 0 0 1-.03-2.523 3.061 3.061 0 0 1-1.552.76c-.689.117-1.304.002-1.671-.09a2.276 2.276 0 0 1-.52-.201c-.17-.091-.332-.194-.44-.397a.56.56 0 0 1-.057-.381.61.61 0 0 1 .218-.331c.198-.161.46-.251.855-.333.719-.148.97-.249 1.123-.37.13-.104.277-.314.537-.622a1.16 1.16 0 0 1-.003-.041 2.96 2.96 0 0 1-1.33-.358c-.15.158-.916.968-1.85 2.092-.393.47-.827.74-1.285.759-.458.02-.872-.211-1.224-.552-.703-.683-1.264-1.858-1.753-3.186-.488-1.328-.885-2.807-1.167-4.067-.283-1.26-.45-2.276-.474-2.766-.105-2.082.382-3.485 1.217-4.37.836-.885 1.982-1.22 3.099-1.284 2.005-.115 3.909.584 4.294.734.742-.504 1.698-.818 2.892-.798a7.39 7.39 0 0 1 1.681.218l.02-.009a6.854 6.854 0 0 1 .739-.214A9.626 9.626 0 0 1 17.08.642zm.152.67h-.146a8.74 8.74 0 0 0-1.704.192c1.246.552 2.187 1.402 2.85 2.25a8.44 8.44 0 0 1 1.132 1.92c.11.264.184.487.226.66.021.087.035.16.04.236.002.038.004.077-.012.144 0 .003-.005.01-.006.013.03.876-.187 1.47-.213 2.306-.02.606.135 1.318.173 2.095.036.73-.052 1.532-.526 2.319.04.048.076.096.114.144 1.254-1.975 2.158-4.16 2.64-6.023.258-1.003.395-1.912.407-2.632.01-.72-.124-1.242-.295-1.46-1.342-1.716-3.158-2.153-4.68-2.165zm-4.79.256c-1.182.003-2.03.36-2.673.895-.663.553-1.108 1.31-1.4 2.085-.347.92-.466 1.81-.513 2.414l.013-.008c.357-.2.826-.4 1.328-.516.502-.115 1.043-.151 1.533.039s.895.637 1.042 1.315c.704 3.257-.219 4.468-.559 5.382a9.61 9.61 0 0 0-.331 1.013c.043-.01.086-.022.129-.026.24-.02.428.06.54.108.342.142.577.44.704.78.033.089.057.185.071.284a.336.336 0 0 1 .02.127 55.14 55.14 0 0 0 .013 3.738c.023.538.057 1.012.1 1.386.043.373.104.657.143.753.128.32.315.739.653 1.024.338.284.823.474 1.709.284.768-.165 1.242-.394 1.559-.723.316-.329.505-.787.626-1.488.181-1.05.545-4.095.589-4.668-.02-.432.044-.764.182-1.017.142-.26.362-.419.552-.505.095-.043.184-.072.257-.093a5.956 5.956 0 0 0-.243-.325 4.456 4.456 0 0 1-.666-1.099 8.296 8.296 0 0 0-.257-.483c-.133-.24-.301-.54-.477-.877-.352-.675-.735-1.493-.934-2.29-.198-.796-.227-1.62.281-2.201.45-.516 1.24-.73 2.426-.61-.035-.105-.056-.192-.115-.332a7.817 7.817 0 0 0-1.041-1.764c-1.005-1.285-2.632-2.559-5.146-2.6h-.115zm-6.642.052c-.127 0-.254.004-.38.011-1.01.058-1.965.351-2.648 1.075-.684.724-1.134 1.911-1.036 3.876.019.372.181 1.414.459 2.652.277 1.238.67 2.695 1.142 3.982.473 1.287 1.046 2.407 1.59 2.937.274.265.512.372.728.363.217-.01.478-.135.797-.518a43.244 43.244 0 0 1 1.81-2.048 3.497 3.497 0 0 1-1.167-3.15c.103-.739.117-1.43.105-1.976-.012-.532-.05-.886-.05-1.107a.336.336 0 0 1 0-.019v-.005l-.001-.006v-.001a9.893 9.893 0 0 1 .592-3.376c.28-.744.697-1.5 1.322-2.112-.614-.202-1.704-.51-2.884-.568a7.603 7.603 0 0 0-.38-.01zM18.199 6.9c-.679.009-1.06.184-1.26.413-.283.325-.31.895-.134 1.597.175.703.537 1.489.877 2.142.17.327.335.621.468.86.134.24.232.41.292.555.055.134.116.252.178.362.263-.555.31-1.1.283-1.668-.035-.703-.198-1.422-.174-2.15.027-.851.195-1.405.21-2.063a5.793 5.793 0 0 0-.74-.048zm-8.234.115a2.82 2.82 0 0 0-.616.074 4.665 4.665 0 0 0-1.153.449 2.417 2.417 0 0 0-.349.228l-.022.02c.006.146.035.5.047 1.021.012.57-.002 1.297-.112 2.084-.239 1.71 1.002 3.126 2.46 3.128.085-.351.225-.707.365-1.082.406-1.094 1.205-1.892.532-5.006-.11-.51-.328-.716-.628-.832a1.474 1.474 0 0 0-.524-.084zm7.917.204h.05c.066.002.127.009.18.022.054.012.1.03.138.055a.164.164 0 0 1 .075.11l-.001.008h.001-.001a.24.24 0 0 1-.035.135.668.668 0 0 1-.11.15.677.677 0 0 1-.386.212.59.59 0 0 1-.41-.103.608.608 0 0 1-.13-.118.26.26 0 0 1-.063-.127.17.17 0 0 1 .042-.128.384.384 0 0 1 .117-.09c.096-.054.226-.094.373-.116.055-.008.109-.012.16-.013zm-7.82.168c.053 0 .109.005.166.013.153.021.289.062.393.122a.446.446 0 0 1 .133.106.223.223 0 0 1 .054.17.302.302 0 0 1-.075.154.649.649 0 0 1-.143.13.64.64 0 0 1-.448.113.728.728 0 0 1-.42-.228.71.71 0 0 1-.118-.164.28.28 0 0 1-.041-.177c.015-.108.104-.164.191-.195a.866.866 0 0 1 .307-.04zm9.06 7.343l-.003.001c-.147.053-.268.075-.37.12a.452.452 0 0 0-.239.214c-.063.115-.117.319-.101.666a.51.51 0 0 0 .148.07c.171.052.458.086.778.081.638-.007 1.423-.156 1.84-.35a3.95 3.95 0 0 0 .943-.615h-.001c-1.393.288-2.18.211-2.663.012a1.315 1.315 0 0 1-.332-.2zm-8.031.094h-.021c-.053.005-.13.023-.279.188-.348.39-.47.635-.757.864-.287.228-.66.35-1.405.503-.236.048-.371.101-.461.144.029.024.026.03.07.053.109.06.249.113.362.142.32.08.846.173 1.395.08.549-.094 1.12-.357 1.607-1.04.084-.118.093-.292.024-.479-.07-.187-.223-.348-.331-.393a.653.653 0 0 0-.204-.06z"/></svg>
                 </section>
@@ -255,7 +274,7 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
                     <li>Email/password sign-ups and logins</li>
                     <li>Third-party logins with OAuth providers (e.g., Google, GitHub)</li>
                     <li>Magic links for passwordless authentication</li>
-                    <li>Role-based access control (RBAC)</li>
+                    <li>Leans on the database</li>
                   </ul>
                 </section>
                 <section>
@@ -296,23 +315,47 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
                     <li>Seamless integration with Supabase services</li>
                     <li>Ability to extend functionality beyond the database</li>
                     <li>Integration with HTTP APIs and database triggers</li>
-                    <li>Other stuff you don't want on the client-side..</li>
+                    <li>All stuff you don't want to handle on the client-side..</li>
                   </ul>
                   <img src="./assets/edge-lick-lips.gif" alt="">
                 </section>
                 <section>
-                  <h2>AI and Vectors</h2>
-                  <p>Supabase supports AI and vector operations, providing:</p>
-                  <ul style="width: 60%;">
-                    <li>Storage and management of embeddings</li>
-                    <li>Vector similarity search for AI applications</li>
-                    <li>Integration with popular AI frameworks and tools</li>
-                    <li>Use of PostgreSQL extensions like pgvector for vector storage and search</li>
-                  </ul>
+                    <h2>
+                        <svg viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M5.85669 1.07837C6.13284 1.07837 6.35669 1.30223 6.35669 1.57837V4.07172C6.35669 4.34786 6.13284 4.57172 5.85669 4.57172C5.58055 4.57172 5.35669 4.34786 5.35669 4.07172V1.57837C5.35669 1.30223 5.58055 1.07837 5.85669 1.07837ZM1.51143 1.51679C1.70961 1.32449 2.02615 1.32925 2.21845 1.52743L4.3494 3.72353C4.5417 3.9217 4.53694 4.23825 4.33876 4.43055C4.14058 4.62285 3.82403 4.61809 3.63173 4.41991L1.50078 2.22381C1.30848 2.02564 1.31325 1.70909 1.51143 1.51679ZM5.10709 6.49114C4.74216 5.65659 5.59204 4.80844 6.42584 5.17508L14.3557 8.66199C15.2287 9.04582 15.1201 10.3175 14.1948 10.5478L11.1563 11.3041L10.4159 14.1716C10.1783 15.0916 8.91212 15.1928 8.53142 14.3222L5.10709 6.49114ZM13.9532 9.5774L6.02332 6.09049L9.44766 13.9216L10.2625 10.7658C10.3083 10.5882 10.4478 10.4499 10.6258 10.4056L13.9532 9.5774ZM1.04663 5.79688C1.04663 5.52073 1.27049 5.29688 1.54663 5.29688H3.99057C4.26671 5.29688 4.49057 5.52073 4.49057 5.79688C4.49057 6.07302 4.26671 6.29688 3.99057 6.29688H1.54663C1.27049 6.29688 1.04663 6.07302 1.04663 5.79688Z"
+                                fill="currentColor"></path>
+                        </svg>
+                        Realtime
+                    </h2>
+                    <p>Supabase supports real-time functionality, offering:</p>
+                    <ul style="width: 60%;">
+                        <li>Broadcasting of database changes</li>
+                        <li>Real-time subscriptions</li>
+                        <li>Presence tracking</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>
+                        <svg viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.99886 7.63216V14.4892M7.99886 7.63216L14.0488 4.11804M7.99886 7.63216L1.94922 4.11819M1.94922 4.11819V8.32332M1.94922 4.11819V4.08217L5.57319 1.97717M14.049 8.36007V4.08217L10.4251 1.97717M11.8165 12.4072L7.99913 14.6245L4.18177 12.4072"
+                                stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        AI and Vectors
+                    </h2>
+                    <p>Supabase supports AI and vector operations, providing:</p>
+                    <ul style="width: 60%;">
+                        <li>Storage and management of embeddings</li>
+                        <li>Vector similarity search for AI applications</li>
+                        <li>Integration with popular AI frameworks and tools</li>
+                        <li>Use of PostgreSQL extensions like pgvector for vector storage and search</li>
+                    </ul>
                     <img style="width: 32%;" src="./assets/jensen-huang.jpg" alt="">
                 </section>
             </section>
             <section>
+                
             <section>
                 <h2>Tools</h2>
                 <div class="container">
@@ -460,7 +503,7 @@ npm install @supabase/supabase-js
                 </script>
             </section>
 				<section data-auto-animate>
-					<h2 data-id="code-title">Client libraries</h2>
+					<h2 data-id="code-title">Client libraries - Fetching data</h2>
 					<pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="20-27|6,14"><script type="text/template">
 import { Component, OnInit, inject } from '@angular/core';
 import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
@@ -494,7 +537,7 @@ export class OrderPageComponent implements OnInit{
 					</script></code></pre>
                 </section>
                     <section data-auto-animate>
-					<h2 data-id="code-title">Client libraries</h2>
+					<h2 data-id="code-title">Client libraries - Authentication</h2>
                     <pre data-id="code-animation"><code class="hljs javascript" data-line-numbers="66-68|27-31"><script type="text/template">
 import { Inject, Injectable, inject } from '@angular/core'
 import {
@@ -567,42 +610,98 @@ export class SupabaseService {
 					</script></code></pre>
 				</section>
                 <section>
-                <h2 data-id="code-title">Local development</h2>
-            <p>For stuff like:</p>
-                <ul>
-                    <li>Setup local project</li>
-                    <li>Migrations</li>
-                    <li>Handy GUI</li>
-                    <li>...</li>
-                </ul>    
-                <img class="fragment" style="height: 16vh; width:16vw"  src="assets/but-wait-theres-more.gif" alt="">
-            </section>
+                    <h2 data-id="code-title">Local development</h2>
+                
+                    <pre data-id="code-animation">
+                                    <code class="hljs bash" data-trim >
+                                        <script type="text/template">
+                npm install supabase --save-dev
+                supabase init
+                supabase start
+                                        </script>
+                                    </code>
+                                </pre>
+                    or
+                    <pre data-id="code-animation">
+                                    <code class="hljs bash" data-trim >
+                                        <script type="text/template">
+                npx supabase init
+                npx supabase start
+                                        </script>
+                                    </code>
+                                </pre>
+                
+                    <div style="width: 100vw;">
+                        <svg class="swimming-docker" xmlns="http://www.w3.org/2000/svg" aria-label="Docker" role="img"
+                            viewBox="0 0 512 512" width="150px" height="150px">
+                            <path stroke="#066da5" stroke-width="38"
+                                d="M296 226h42m-92 0h42m-91 0h42m-91 0h41m-91 0h42m8-46h41m8 0h42m7 0h42m-42-46h42" />
+                            <path fill="#066da5"
+                                d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39" />
+                        </svg>
+                    </div>
+                </section>
                 <section>
                 <h2 data-id="code-title">Local development</h2>
+                <p>For stuff like:</p>
+                <ul>
+                    <li>Setup local project</li>
+                    <li>Testing</li>
+                    <li>Migrations</li>
+                    <li>TS type generation</li>
+                    <li>...</li>
+                </ul>
+                <a href="http://127.0.0.1:54323/project/default">    
+                    <img class="fragment" style="height: 16vh; width:16vw"  src="assets/but-wait-theres-more.gif" alt="">
+                </a>    
+            </section>
                 
-                <a href="http://127.0.0.1:54323/project/default">Local supabase</a> 
-                <pre data-id="code-animation">
-                    <code class="hljs bash" data-trim >
-                        <script type="text/template">
-npm install supabase --save-dev
-supabase init
-supabase start
-                        </script>
-                    </code>
-                </pre>
-                or
-                <pre data-id="code-animation">
-                    <code class="hljs bash" data-trim >
-                        <script type="text/template">
-npx supabase init
-npx supabase start
-                        </script>
-                    </code>
-                </pre>
-                
-                <div style="width: 100vw;">
-				    <svg class="swimming-docker" xmlns="http://www.w3.org/2000/svg" aria-label="Docker" role="img" viewBox="0 0 512 512" width="150px" height="150px"><path stroke="#066da5" stroke-width="38" d="M296 226h42m-92 0h42m-91 0h42m-91 0h41m-91 0h42m8-46h41m8 0h42m7 0h42m-42-46h42"/><path fill="#066da5" d="m472 228s-18-17-55-11c-4-29-35-46-35-46s-29 35-8 74c-6 3-16 7-31 7H68c-5 19-5 145 133 145 99 0 173-46 208-130 52 4 63-39 63-39"/></svg>
-                </div>
+            <section>
+                <h2>Run it on Supabase.com</h2>
+                Start a project on <a href="https://supabase.com">supabase.com</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pricing Level</th>
+                            <th>Free</th>
+                            <th>Pro</th>
+                            <th>Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Cost</td>
+                            <td class="glow">$0</td>
+                            <td>Starting at $25/month</td>
+                            <td>Custom pricing</td>
+                        </tr>
+                        <tr>
+                            <td>Database Storage</td>
+                            <td class="glow">500MB</td>
+                            <td>8GB</td>
+                            <td>Custom</td>
+                        </tr>
+                        <tr>
+                            <td>API Requests</td>
+                            <td class="glow">500,000/month</td>
+                            <td>Unlimited (with scaling)</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Auth Users</td>
+                            <td class="glow">Unlimited</td>
+                            <td>Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Support</td>
+                            <td class="glow">Community</td>
+                            <td>Standard</td>
+                            <td>Premium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            
             </section>
             </section>
             <section>
