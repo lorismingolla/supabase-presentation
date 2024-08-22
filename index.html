@@ -119,6 +119,8 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
             top: 50%; /* Vertically center the div */
             transform: translateY(-50%); /* Adjust for centering */
             animation: slideIn 1s forwards; /* Apply the slide-in animation */
+            width: 30vh;
+            height: 30vh;
         }
     </style>
 </head>
@@ -131,11 +133,12 @@ https://cdn.jsdelivr.net/npm/@xeserv/clippyjs@0.1.0/dist/clippy.min.js
                 <h1>Introduction to </h1><img style="width: 40%; height: 40%;" src="./assets/supabase-dark.svg" alt="Supabase Architecture">
                 <p>Building your backend has never been easier!</p>
                 <audio data-autoplay="true" src=""></audio>
-                <div class="fragment fade-up git-stars">
-                    <iframe style="width:100%;height:auto;min-width:600px;min-height:400px;"
-                        src="https://star-history.com/embed?secret=#supabase/supabase&Date" frameBorder="0"></iframe>
+                <div class="fragment fade-in-then-out git-stars">
+                <img style="width: 100%; height: 100%;" src="./assets/star-history-2024822.png" alt="">    
                 </div>
-
+                <div class="fragment fade-in" style=" width: 30vw; height: 30vh;">
+                <img style="width: 100%; height: 100%;" src="./assets/i-am-the-backend-now.bmp" alt="">
+                </div>
             </section>
             <section>
                     <h2>Brief History & Background</h2>
@@ -479,7 +482,10 @@ npm install @supabase/supabase-js
                                 'npm WARN notsup Not compatible with your version of node/npm: @supabase/supabase-js@1.0.0',
                                 '',
                                 'added 1 package, and audited 1 package in 2s',
-                                'found 0 vulnerabilities'
+                                'found 0 vulnerabilities',
+                                '',
+                                'exept for 1,...',
+                                'it\'s you'
                             ];
 
                             term.writeln('');
@@ -610,7 +616,7 @@ export class SupabaseService {
 					</script></code></pre>
 				</section>
                 <section>
-                    <h2 data-id="code-title">Local development</h2>
+                    <h2 data-id="code-title">Local development - CLI</h2>
                 
                     <pre data-id="code-animation">
                                     <code class="hljs bash" data-trim >
@@ -642,7 +648,7 @@ export class SupabaseService {
                     </div>
                 </section>
                 <section>
-                <h2 data-id="code-title">Local development</h2>
+                <h2 data-id="code-title">Local development - CLI</h2>
                 <p>For stuff like:</p>
                 <ul>
                     <li>Setup local project</li>
